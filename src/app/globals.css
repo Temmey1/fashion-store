@@ -1,26 +1,53 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors */
+  --color-primary-50: #fdf2f8;
+  --color-primary-100: #fce7f3;
+  --color-primary-200: #fbcfe8;
+  --color-primary-300: #f9a8d4;
+  --color-primary-400: #f472b6;
+  --color-primary-500: #ec4899;
+  --color-primary-600: #db2777;
+  --color-primary-700: #be185d;
+  --color-primary-800: #9d174d;
+  --color-primary-900: #831843;
+
+  /* Secondary Colors - Neutral */
+  --color-secondary-50: #fafafa;
+  --color-secondary-100: #f5f5f5;
+  --color-secondary-200: #e5e5e5;
+  --color-secondary-300: #d4d4d4;
+  --color-secondary-400: #a3a3a3;
+  --color-secondary-500: #737373;
+  --color-secondary-600: #525252;
+  --color-secondary-700: #404040;
+  --color-secondary-800: #262626;
+  --color-secondary-900: #171717;
+
+  /* Accent Colors */
+  --color-accent-yellow: #FFC633;
+  --color-accent-red: #FF3333;
+  --color-accent-green: #4CAF50;
+
+  /* Background Colors */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F5F5F5;
+  
+  /* Text Colors */
+  --color-text-primary: #171717;
+  --color-text-secondary: #737373;
+  --color-text-muted: #A3A3A3;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-[#F5F5F5] text-[#171717];
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
