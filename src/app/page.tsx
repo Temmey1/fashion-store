@@ -1,6 +1,3 @@
-"use client";
-import { useEffect, useState } from "react";
-
 import { Hero } from "@/components/home/Hero";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 
