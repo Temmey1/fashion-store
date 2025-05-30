@@ -6,13 +6,18 @@ type PageParams = {
   handle: string;
 };
 
+type SearchParams = { [key: string]: string | string[] | undefined };
+
 type PageProps = {
   params: Promise<PageParams>;
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<SearchParams>;
 };
 
 export default async function ProductPage(props: PageProps) {
-  const params = await props.params;
+  const [params, searchParams] = await Promise.all([
+    props.params,
+    props.searchParams,
+  ]);
 
   if (!params.handle) {
     console.error("Product handle is missing");
