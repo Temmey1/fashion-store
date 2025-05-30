@@ -10,7 +10,9 @@ export const Hero = () => {
             <div className="sm:text-center lg:text-left">
               <h1 className="text-4xl tracking-tight font-extrabold text-[var(--color-text)] sm:text-5xl md:text-6xl">
                 <span className="block">WELCOME TO</span>
-                <span className="block text-[var(--color-primary)]">MAXY STYLES</span>
+                <span className="block text-[var(--color-primary)]">
+                  MAXY STYLES
+                </span>
                 <span className="block">FASHION</span>
                 <span className="block">COLLECTION</span>
               </h1>
@@ -33,15 +35,15 @@ export const Hero = () => {
         </div>
       </div>
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-        <div className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full bg-secondary-100">
-          {/* Replace with your hero image */}
-          <div className="w-full h-full relative">
+        <div className="relative h-56 w-full sm:h-72 md:h-96 lg:w-full lg:h-full p-6">
+          <div className="w-full h-full relative rounded-lg overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-transform duration-300 hover:scale-[1.01]">
             <Image
               src="/images/products/bluesuit.jpeg"
               alt="Fashion model"
               fill
-              className="object-cover"
+              className="object-cover object-center"
               priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
             />
           </div>
         </div>
