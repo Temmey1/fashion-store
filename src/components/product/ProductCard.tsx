@@ -4,8 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, ShoppingBag } from "lucide-react";
-import { useCartStore } from "@/lib/store";
-import type { CartStore } from "@/lib/store";
 import { ProductModal } from "../product/ProductModal";
 
 interface Product {
