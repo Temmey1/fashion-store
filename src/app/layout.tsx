@@ -15,7 +15,8 @@ export const metadata: Metadata = {
     icon: "/images/maxylogo.jpg",
     apple: "/images/maxylogo.jpg",
   },
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  viewport:
+    "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0",
 };
 
 export default function RootLayout({
@@ -24,14 +25,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <body
-        className={`${inter.className} bg-[#F5F5F5] text-gray-900 min-h-screen flex flex-col overflow-x-hidden`}
+        className={`${inter.className} min-h-full flex flex-col overflow-x-hidden bg-[#F5F5F5]`}
       >
         <CartProvider>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-grow w-full relative">
+              <div className="w-full">{children}</div>
+            </main>
+            <Footer />
+          </div>
         </CartProvider>
       </body>
     </html>
