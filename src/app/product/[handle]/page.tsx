@@ -14,10 +14,8 @@ type PageProps = {
 };
 
 export default async function ProductPage(props: PageProps) {
-  const [params, searchParams] = await Promise.all([
-    props.params,
-    props.searchParams,
-  ]);
+  // We only need params, so we'll only await that
+  const params = await props.params;
 
   if (!params.handle) {
     console.error("Product handle is missing");
