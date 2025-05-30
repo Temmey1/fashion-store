@@ -37,15 +37,18 @@ export const ProductCard = ({
   };
 
   return (
-    <>
-      <Link href={`/product/${handle}`} className="group relative block">
-        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-[var(--color-primary-lighter)] lg:aspect-none lg:h-80">
+    <div className="flex flex-col h-full">
+      <Link
+        href={`/product/${handle}`}
+        className="group relative block flex-grow"
+      >
+        <div className="aspect-square w-full relative overflow-hidden rounded-md bg-[var(--color-primary-lighter)]">
           <Image
             src={image}
             alt={name}
-            width={500}
-            height={500}
-            className="h-full w-full object-cover object-center lg:h-full lg:w-full transition-transform duration-200 group-hover:scale-105"
+            fill
+            className="object-cover object-center transition-transform duration-200 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
           />
           {isNew && (
             <div className="absolute top-2 left-2 z-10">
@@ -77,12 +80,14 @@ export const ProductCard = ({
             </button>
           </div>
         </div>
-        <div className="mt-4">
-          <h3 className="text-sm text-[var(--color-text)]">{name}</h3>
-          <p className="mt-1 text-sm text-[var(--color-text-light)]">
+        <div className="mt-4 space-y-2 flex-none">
+          <h3 className="text-sm font-medium text-[var(--color-text)] line-clamp-1">
+            {name}
+          </h3>
+          <p className="text-sm text-[var(--color-text-light)] line-clamp-2">
             {category}
           </p>
-          <p className="mt-1 text-sm font-medium text-[var(--color-text)]">
+          <p className="text-sm font-semibold text-[var(--color-text)]">
             ₦{price.toLocaleString()}
           </p>
         </div>
@@ -93,6 +98,6 @@ export const ProductCard = ({
         onClose={() => setIsModalOpen(false)}
         product={{ id, name, price, image, category }}
       />
-    </>
+    </div>
   );
 };

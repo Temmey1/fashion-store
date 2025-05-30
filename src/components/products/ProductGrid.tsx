@@ -30,7 +30,7 @@ export const ProductGrid = ({
   return (
     <section className="bg-white py-12 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <div className="text-center mb-12">
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--color-text)] sm:text-4xl">
             {title}
           </h2>
@@ -41,7 +41,7 @@ export const ProductGrid = ({
           )}
         </div>
 
-        <div className="mt-8 sm:mt-12 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {products.map((product) => (
             <ProductCard
               key={product.id}

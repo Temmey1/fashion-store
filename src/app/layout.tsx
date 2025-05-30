@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     icon: "/images/maxylogo.jpg",
     apple: "/images/maxylogo.jpg",
   },
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
 export default function RootLayout({
@@ -25,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-[#F5F5F5] text-gray-900 min-h-screen flex flex-col`}
+        className={`${inter.className} bg-[#F5F5F5] text-gray-900 min-h-screen flex flex-col overflow-x-hidden`}
       >
         <CartProvider>
           <Header />
