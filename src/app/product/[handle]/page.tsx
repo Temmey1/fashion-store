@@ -2,13 +2,14 @@ import { getProductByHandle } from "@/lib/shopify";
 import { ProductDetails } from "@/components/product/ProductDetails";
 import { notFound } from "next/navigation";
 
-interface PageProps {
+type PageProps = {
   params: {
     handle: string;
   };
-}
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-export default async function ProductPage({ params }: PageProps) {
+export default async function ProductPage({ params, searchParams }: PageProps) {
   if (!params.handle) {
     console.error("Product handle is missing");
     notFound();
