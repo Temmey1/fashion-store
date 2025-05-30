@@ -2,18 +2,13 @@ import { getProductByHandle } from "@/lib/shopify";
 import { ProductDetails } from "@/components/product/ProductDetails";
 import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: {
-    handle: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
 export default async function ProductPage({
   params,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   searchParams,
-}: PageProps) {
+}: {
+  params: { handle: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   if (!params.handle) {
     console.error("Product handle is missing");
     notFound();
