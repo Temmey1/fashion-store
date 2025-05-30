@@ -3,7 +3,7 @@ import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 
 export default function Home() {
   return (
-    <main>
+    <main className="min-h-screen">
       <Hero />
       <FeaturedProducts />
     </main>

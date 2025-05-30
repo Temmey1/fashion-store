@@ -44,12 +44,12 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-lg rounded-md shadow-xl">
         <div className="flex justify-between items-center px-6 py-4 border-b">
-          <h2 className="text-2xl font-semibold text-gray-900">
+          <h2 className="text-2xl font-semibold text-[var(--color-text)]">
             {isLogin ? "Login to Your Account" : "Create New Account"}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-[var(--color-text-lighter)] hover:text-[var(--color-text)]"
           >
             <X className="w-6 h-6" />
           </button>
@@ -60,7 +60,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-medium text-[var(--color-text)] mb-2"
               >
                 Full Name
               </label>
@@ -69,7 +69,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-3 rounded-md border border-[var(--color-primary-lighter)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
                 required={!isLogin}
                 placeholder="Enter your full name"
               />
@@ -79,7 +79,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-[var(--color-text)] mb-2"
             >
               Email Address
             </label>
@@ -88,7 +88,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-3 rounded-md border border-[var(--color-primary-lighter)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
               required
               placeholder="Enter your email"
             />
@@ -97,7 +97,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-[var(--color-text)] mb-2"
             >
               Password
             </label>
@@ -106,7 +106,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full px-4 py-3 rounded-md border border-[var(--color-primary-lighter)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
               required
               placeholder={
                 isLogin ? "Enter your password" : "Create a password"
@@ -116,16 +116,16 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
 
           <button
             type="submit"
-            className="w-full bg-primary-600 text-base py-3 px-4 rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 font-medium transition-colors duration-200"
+            className="w-full bg-[var(--color-primary)] text-base py-3 px-4 rounded-md hover:bg-[var(--color-primary-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary)] font-medium transition-colors duration-200"
           >
             {isLogin ? "Sign In" : "Create Account"}
           </button>
         </form>
 
-        <div className="px-6 py-4 bg-gray-50 border-t text-center">
+        <div className="px-6 py-4 bg-[var(--color-primary-lighter)] border-t text-center">
           <button
             onClick={() => setIsLogin(!isLogin)}
-            className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+            className="text-sm text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] font-medium"
           >
             {isLogin
               ? "Don't have an account? Sign up"

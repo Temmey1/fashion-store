@@ -4,11 +4,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CartProvider } from "@/context/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Fashion Store",
+  title: "MaxyStyles",
   description: "Your one-stop destination for trendy fashion and accessories",
 };
 
@@ -22,9 +23,11 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-[#F5F5F5] text-gray-900 min-h-screen flex flex-col`}
       >
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

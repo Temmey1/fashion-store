@@ -1,10 +1,10 @@
-import { SAMPLE_PRODUCTS } from "@/lib/utils";
+import { getProducts } from "@/lib/shopify";
 import { ProductGrid } from "@/components/products/ProductGrid";
 
-export default function FeaturedPage() {
-  const featuredProducts = SAMPLE_PRODUCTS.filter(
-    (product) => product.isFeatured
-  );
+export default async function FeaturedPage() {
+  const products = await getProducts();
+  // For now, let's select the last 4 products as featured
+  const featuredProducts = products.slice(-4);
 
   return (
     <ProductGrid

@@ -13,6 +13,7 @@ interface SearchModalProps {
 export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState(SAMPLE_PRODUCTS);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (searchQuery) {
@@ -31,54 +32,64 @@ export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-20">
-      <div className="bg-white w-full max-w-2xl rounded-lg shadow-xl mx-4">
-        <div className="p-4 border-b flex items-center">
-          <Search className="w-5 h-5 text-gray-400" />
+      <div className="bg-white w-full max-w-2xl rounded-lg shadow-xl">
+        <div className="flex items-center px-6 py-4 border-b">
+          <Search className="w-5 h-5 text-[var(--color-text-lighter)]" />
           <input
             type="text"
-            placeholder="Search products..."
-            className="flex-1 ml-3 outline-none"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search products..."
+            className="flex-1 ml-3 text-[var(--color-text)] placeholder-[var(--color-text-lighter)] bg-transparent border-none focus:outline-none focus:ring-0"
             autoFocus
           />
-          <button onClick={onClose}>
-            <X className="w-5 h-5 text-gray-400 hover:text-gray-600" />
+          <button
+            onClick={onClose}
+            className="text-[var(--color-text-lighter)] hover:text-[var(--color-text)]"
+          >
+            <X className="w-5 h-5" />
           </button>
         </div>
-        <div className="max-h-96 overflow-y-auto p-4">
-          {searchResults.length === 0 ? (
-            <p className="text-center text-gray-500">No products found</p>
-          ) : (
+
+        <div className="p-6">
+          {loading ? (
+            <div className="flex justify-center">
+              <div className="w-6 h-6 border-2 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          ) : searchResults.length > 0 ? (
             <div className="space-y-4">
               {searchResults.map((product) => (
                 <Link
                   key={product.id}
-                  href={`/products/${product.id}`}
-                  className="flex items-center space-x-4 hover:bg-gray-50 p-2 rounded"
+                  href={`/product/${product.id}`}
                   onClick={onClose}
+                  className="flex items-center space-x-4 p-3 rounded-lg hover:bg-[var(--color-primary-lighter)] transition-colors duration-200"
                 >
-                  <div className="relative w-16 h-20">
+                  <div className="flex-shrink-0 w-16 h-16 rounded overflow-hidden">
                     <Image
                       src={product.image}
                       alt={product.name}
-                      fill
-                      className="object-cover rounded"
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-cover"
                     />
                   </div>
-                  <div>
-                    <h3 className="font-medium text-gray-900">
+                  <div className="flex-1">
+                    <h3 className="text-base font-medium text-[var(--color-text)]">
                       {product.name}
                     </h3>
-                    <p className="text-sm text-gray-500">{product.category}</p>
-                    <p className="text-sm font-medium text-gray-900">
-                      ${product.price.toFixed(2)}
+                    <p className="text-sm text-[var(--color-text-light)]">
+                      ${product.price}
                     </p>
                   </div>
                 </Link>
               ))}
             </div>
-          )}
+          ) : searchQuery ? (
+            <p className="text-center text-[var(--color-text-light)]">
+              No products found
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

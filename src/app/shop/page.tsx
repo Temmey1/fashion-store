@@ -1,12 +1,16 @@
-import { SAMPLE_PRODUCTS } from "@/lib/utils";
+import { getProducts } from "@/lib/shopify";
 import { ProductGrid } from "@/components/products/ProductGrid";
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const products = await getProducts();
+
   return (
-    <ProductGrid
-      products={SAMPLE_PRODUCTS}
-      title="All Products"
-      description="Explore our collection of trendy fashion items"
-    />
+    <main className="min-h-screen py-12">
+      <ProductGrid
+        products={products}
+        title="All Products"
+        description="Browse our collection of fashion items"
+      />
+    </main>
   );
-} 
+}

@@ -6,16 +6,16 @@ import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchModal } from "@/components/search/SearchModal";
 import { CartModal } from "@/components/cart/CartModal";
-import { useCartStore } from "@/lib/store";
-import type { CartStore } from "@/lib/store";
+import { useCart } from "@/context/CartContext";
 import { UserMenu } from "@/components/auth/UserMenu";
+import Image from "next/image";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const pathname = usePathname();
-  const totalItems = useCartStore((state: CartStore) => state.totalItems);
+  const { items } = useCart();
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -30,9 +30,21 @@ export const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <span className="text-2xl font-bold text-primary-600">
-                FASHION
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="w-10 h-10 relative">
+                <Image
+                  src="/images/maxylogo.jpg"
+                  alt="Maxy Styles Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain rounded-full"
+                />
+              </div>
+              <span
+                className="text-2xl font-bold"
+                style={{ color: "var(--color-primary)" }}
+              >
+                MAXYSTYLES
               </span>
             </Link>
 
@@ -43,10 +55,10 @@ export const Header = () => {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "text-gray-700 px-4 py-2 rounded-md transition-all duration-200 inline-block hover:bg-gray-100",
+                    "px-4 py-2 rounded-md transition-all duration-200 inline-block hover:bg-[var(--color-primary-lighter)]",
                     pathname === link.href
-                      ? "text-primary-600 font-medium bg-primary-50"
-                      : "hover:text-primary-600"
+                      ? "text-[var(--color-primary)] font-medium bg-[var(--color-primary-lighter)]"
+                      : "text-[var(--color-text)] hover:text-[var(--color-primary)]"
                   )}
                 >
                   {link.label}
@@ -57,28 +69,28 @@ export const Header = () => {
             {/* Actions */}
             <div className="flex items-center space-x-4">
               <button
-                className="inline-flex items-center justify-center p-2 text-gray-700 hover:text-primary-600 hover:bg-gray-100 rounded-md transition-all duration-200"
+                className="inline-flex items-center justify-center p-2 text-[var(--color-text)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-lighter)] rounded-md transition-all duration-200"
                 onClick={() => setIsSearchOpen(true)}
               >
                 <Search className="w-5 h-5" />
               </button>
-              <div className="inline-flex items-center justify-center text-gray-700 hover:text-primary-600 rounded-md transition-all duration-200">
+              <div className="inline-flex items-center justify-center text-[var(--color-text)] hover:text-[var(--color-primary)] rounded-md transition-all duration-200">
                 <UserMenu />
               </div>
               <button
-                className="inline-flex items-center justify-center p-2 text-gray-700 hover:text-primary-600 hover:bg-gray-100 rounded-md transition-all duration-200 relative"
+                className="inline-flex items-center justify-center p-2 text-[var(--color-text)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-lighter)] rounded-md transition-all duration-200 relative"
                 onClick={() => setIsCartOpen(true)}
               >
                 <ShoppingBag className="w-5 h-5" />
-                {totalItems() > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-primary-600 text-base rounded-full w-5 h-5 flex items-center justify-center">
-                    {totalItems()}
+                {items.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-[var(--color-primary)] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {items.length}
                   </span>
                 )}
               </button>
               {/* Mobile menu button */}
               <button
-                className="md:hidden inline-flex items-center justify-center p-2 text-gray-700 hover:text-primary-600 hover:bg-gray-100 rounded-md transition-all duration-200"
+                className="md:hidden inline-flex items-center justify-center p-2 text-[var(--color-text)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-lighter)] rounded-md transition-all duration-200"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 {isMobileMenuOpen ? (

@@ -29,7 +29,7 @@ export const UserMenu = () => {
       {isAuthenticated ? (
         <div className="relative" ref={dropdownRef}>
           <button
-            className="flex items-center space-x-2 p-3 hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-all duration-200"
+            className="flex items-center space-x-2 p-3 hover:bg-[var(--color-primary-lighter)] hover:text-[var(--color-primary)] rounded-lg transition-all duration-200"
             onMouseEnter={() => setIsDropdownOpen(true)}
           >
             <User className="w-5 h-5" />
@@ -46,7 +46,7 @@ export const UserMenu = () => {
                   logout();
                   setIsDropdownOpen(false);
                 }}
-                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-primary-100 hover:text-primary-600 transition-all duration-200"
+                className="flex items-center w-full px-4 py-2 text-sm text-[var(--color-text)] hover:bg-[var(--color-primary-lighter)] hover:text-[var(--color-primary)] transition-all duration-200"
               >
                 <LogOut className="w-4 h-4 mr-2" />
                 Logout
@@ -57,7 +57,7 @@ export const UserMenu = () => {
       ) : (
         <button
           onClick={() => setIsAuthModalOpen(true)}
-          className="flex items-center space-x-2 p-3 hover:bg-primary-100 hover:text-primary-600 rounded-lg transition-all duration-200"
+          className="flex items-center space-x-2 p-3 hover:bg-[var(--color-primary-lighter)] hover:text-[var(--color-primary)] rounded-lg transition-all duration-200"
         >
           <User className="w-5 h-5" />
           <span>Login</span>
