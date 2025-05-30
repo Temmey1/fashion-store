@@ -2,30 +2,28 @@ import { getProductByHandle } from "@/lib/shopify";
 import { ProductDetails } from "@/components/product/ProductDetails";
 import { notFound } from "next/navigation";
 
-type PageProps = {
-  params: Promise<{
+interface PageProps {
+  params: {
     handle: string;
-  }>;
+  };
   searchParams: { [key: string]: string | string[] | undefined };
-};
+}
 
 export default async function ProductPage({
   params,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   searchParams,
 }: PageProps) {
-  const resolvedParams = await params;
-
-  if (!resolvedParams.handle) {
+  if (!params.handle) {
     console.error("Product handle is missing");
     notFound();
   }
 
   try {
-    const product = await getProductByHandle(resolvedParams.handle);
+    const product = await getProductByHandle(params.handle);
 
     if (!product) {
-      console.error("Product not found:", resolvedParams.handle);
+      console.error("Product not found:", params.handle);
       notFound();
     }
 
