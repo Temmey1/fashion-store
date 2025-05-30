@@ -15,6 +15,7 @@ interface ProductModalProps {
     image: string;
     category: string;
     description?: string;
+    variantId: string;
   };
 }
 
@@ -27,8 +28,12 @@ export const ProductModal = ({
   const addItem = useCartStore((state: CartStore) => state.addItem);
 
   const handleAddToCart = () => {
+    const cartItem = {
+      ...product,
+      quantity: 1,
+    };
     for (let i = 0; i < quantity; i++) {
-      addItem(product);
+      addItem(cartItem);
     }
     onClose();
   };

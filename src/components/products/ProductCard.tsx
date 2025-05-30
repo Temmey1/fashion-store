@@ -96,7 +96,7 @@ export const ProductCard = ({
       <ProductModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        product={{ id, name, price, image, category }}
+        product={{ id, name, price, image, category, variantId }}
       />
     </div>
   );

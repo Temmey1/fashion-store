@@ -58,7 +58,7 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                         onClick={() =>
                           updateQuantity(
                             item.id,
-                            Math.max(0, item.quantity - 1)
+                            Math.max(0, (item.quantity ?? 0) - 1)
                           )
                         }
                         className="p-1 hover:bg-[var(--color-primary-lighter)] rounded text-[var(--color-text)]"
@@ -70,7 +70,7 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                       </span>
                       <button
                         onClick={() =>
-                          updateQuantity(item.id, item.quantity + 1)
+                          updateQuantity(item.id, (item.quantity ?? 0) + 1)
                         }
                         className="p-1 hover:bg-[var(--color-primary-lighter)] rounded text-[var(--color-text)]"
                       >
@@ -85,7 +85,7 @@ export const CartModal = ({ isOpen, onClose }: CartModalProps) => {
                     </div>
                   </div>
                   <p className="font-medium text-[var(--color-text)]">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    ${(item.price * (item.quantity ?? 0)).toFixed(2)}
                   </p>
                 </div>
               ))}

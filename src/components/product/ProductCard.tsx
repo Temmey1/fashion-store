@@ -92,6 +92,7 @@ export const ProductCard = ({ product, addToCart }: ProductCardProps) => {
           price: parseFloat(product.price),
           image: product.image,
           category: product.description,
+          variantId: product.variantId,
         }}
       />
     </div>
