@@ -11,6 +11,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "MaxyStyles",
   description: "Your one-stop destination for trendy fashion and accessories",
+  icons: {
+    icon: "/images/maxylogo.jpg",
+    apple: "/images/maxylogo.jpg",
+  },
 };
 
 export default function RootLayout({

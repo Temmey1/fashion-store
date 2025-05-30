@@ -65,6 +65,10 @@ interface CheckoutResponse {
 // Initialize GraphQL Client
 const endpoint = `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/api/2024-01/graphql.json`;
 
+if (!process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || !process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
+  console.error('Missing Shopify environment variables. Please check your .env.local file.');
+}
+
 export const shopifyClient = new GraphQLClient(endpoint, {
   headers: {
     'X-Shopify-Storefront-Access-Token': process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || '',
@@ -170,7 +174,9 @@ export const CREATE_CHECKOUT_MUTATION = `
 // Helper functions
 export async function getProducts() {
   try {
+    console.log('Fetching products from Shopify...');
     const data = await shopifyClient.request<ProductsResponse>(PRODUCTS_QUERY);
+    console.log('Successfully fetched products');
     return data.products.edges.map(({ node }) => ({
       id: node.id,
       title: node.title,
@@ -183,16 +189,32 @@ export async function getProducts() {
     }));
   } catch (error) {
     console.error('Error fetching products:', error);
+    if (error instanceof Error) {
+      console.error('Error details:', error.message);
+    }
     return [];
   }
 }
 
 export async function getProductByHandle(handle: string) {
   try {
+    console.log(`Fetching product with handle: ${handle}`);
+    if (!handle) {
+      console.error('Product handle is undefined or empty');
+      return null;
+    }
+
     const data = await shopifyClient.request<SingleProductResponse>(
       PRODUCT_BY_HANDLE_QUERY,
       { handle }
     );
+
+    if (!data || !data.product) {
+      console.error('No product data returned from Shopify');
+      return null;
+    }
+
+    console.log('Successfully fetched product data');
     const product = data.product;
     return {
       id: product.id,
@@ -202,15 +224,14 @@ export async function getProductByHandle(handle: string) {
       price: product.priceRange.minVariantPrice.amount,
       currencyCode: product.priceRange.minVariantPrice.currencyCode,
       image: product.images.edges[0]?.node.url || '',
-      variants: product.variants.edges.map(({ node }) => ({
-        id: node.id,
-        title: node.title,
-        price: node.price.amount,
-        currencyCode: node.price.currencyCode,
-      })),
+      variantId: product.variants.edges[0]?.node.id || '',
     };
   } catch (error) {
     console.error('Error fetching product:', error);
+    if (error instanceof Error) {
+      console.error('Error details:', error.message);
+      console.error('Stack trace:', error.stack);
+    }
     return null;
   }
 }

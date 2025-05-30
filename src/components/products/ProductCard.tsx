@@ -83,7 +83,7 @@ export const ProductCard = ({
             {category}
           </p>
           <p className="mt-1 text-sm font-medium text-[var(--color-text)]">
-            ${price}
+            ₦{price.toLocaleString()}
           </p>
         </div>
       </Link>
