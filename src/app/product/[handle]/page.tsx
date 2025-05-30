@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 export default async function ProductPage({
   params,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   searchParams,
 }: {
   params: { handle: string };
